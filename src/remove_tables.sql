@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS departments;
+DROP TABLE IF EXISTS departments_teachers;
+DROP TABLE IF EXISTS departments_groups;
+DROP TABLE IF EXISTS schedules;
+DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS levels_setting_down;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS disciplines;
+DROP TABLE IF EXISTS parlours;
