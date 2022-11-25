@@ -1,12 +1,15 @@
-import sqlite3
+# import sqlite3
+import psycopg2
 from typing import List, Optional, Tuple
 
 
 class ServiceDB:
 
     def __init__(self, path: str) -> None:
-        self.__connection: sqlite3.Connection = sqlite3.connect(path)
-        self.__cursor: sqlite3.Cursor = sqlite3.Connection.cursor(self.__connection)
+        self.__connection = psycopg2.connect(dbname='university_bd', host='localhost', port='5432')
+        self.__cursor = self.__connection.cursor()
+        # self.__connection: sqlite3.Connection = sqlite3.connect(path)
+        # self.__cursor: sqlite3.Cursor = sqlite3.Connection.cursor(self.__connection)
 
     def execute(self, query: str) -> None:
         self.__cursor.execute(query)
