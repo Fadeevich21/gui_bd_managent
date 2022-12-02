@@ -12,8 +12,12 @@ class ServiceDB:
         # self.__cursor: sqlite3.Cursor = sqlite3.Connection.cursor(self.__connection)
 
     def execute(self, query: str) -> None:
-        self.__cursor.execute(query)
-        self.__connection.commit()
+        try:
+            self.__cursor.execute(query)
+            self.__connection.commit()
+        except:
+            print("rollback")
+            self.__connection.rollback()
 
     def execute_from_file(self, filename: str):
         with open(filename, 'r', encoding='utf-8') as file:
@@ -69,3 +73,17 @@ class ServiceDB:
         result = self.__cursor.fetchall()
 
         return result
+
+
+    def add_column(self, table_name: str, 
+                   request: str):
+        query = f'ALTER TABLE {table_name} ADD COLUMN {request};'
+        self.execute(query)
+
+    def remove_column(self, table_name: str, column_name: str):
+        query = f'ALTER TABLE {table_name} DROP COLUMN {column_name};'
+        self.execute(query)
+
+
+    def get_columns(self):
+        return [desc[0] for desc in self.__cursor.description]

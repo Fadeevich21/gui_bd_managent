@@ -31,6 +31,13 @@ class Menu:
         if choose > len(self.__menu):
             raise IndexError(f'Ваш выбор {choose} не допустим')
 
-        get_rows_func, columns = lambda: self.__menu[choose].get_rows(self.__db), self.__menu[choose].get_columns()
+        get_rows_func = lambda: self.__menu[choose].get_rows(self.__db)
         rows = get_rows_func()
+        columns = self.__db.get_columns()
         return (rows, columns)
+
+    def add_column(self, table_name: str, request: str):
+        self.__db.add_column(table_name, request)
+
+    def remove_column(self, table_name: str, column_name: str):
+        self.__db.remove_column(table_name, column_name)
